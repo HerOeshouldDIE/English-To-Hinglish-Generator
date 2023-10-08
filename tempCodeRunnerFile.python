@@ -1,0 +1,52 @@
+pip install googletrans
+from googletrans import Translator
+pip install langid
+import langid
+pip install transformers sentencepiece
+pip install mtranslate
+pip install translate
+import requests
+from translate import Translator
+import langid
+
+class HinglishTranslator:
+    def translate_to_hinglish(self, text):
+        translator = Translator(to_lang='hi')
+        translation = translator.translate(text)
+        return translation
+
+def convert_to_hinglish_with_english(text, exclusion_list):
+    # Detect the language of each word
+    words = text.split()
+    hinglish_words = []
+
+    for word in words:
+        # Keep English words from the exclusion list in English alphabets
+        if word.lower() in exclusion_list:
+            hinglish_words.append(word)
+        else:
+            hinglish_words.append(word)
+
+    return ' '.join(hinglish_words)
+
+if __name__ == "__main__":
+    # English words to exclude from translation
+    exclusion_list = ["loan", "minute", "headset", "headphone", "video", "comment"]
+
+    # Get user input for the sentence
+    user_input = input("Enter a sentence in English to be converted to Hinglish: ")
+
+    # Create translator instance
+    translator = HinglishTranslator()
+
+    # Detect language before translation
+    lang, _ = langid.classify(user_input)
+
+    # Translate only if the language is English
+    if lang == 'en':
+        hinglish_translation = translator.translate_to_hinglish(user_input)
+        hinglish_with_english = convert_to_hinglish_with_english(hinglish_translation, exclusion_list)
+        print(hinglish_with_english)
+    else:
+        # If the input is not in English, print it as it is
+        print(user_input)

@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hinglish Translator</title>
+    <!-- Professional Styling with a Different Title Font and Image Above the Box -->
+    <style>
+        body {
+            font-family: 'Candara', 'Arial', sans-serif;
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        h1 {
+            font-family: 'Poppins', sans-serif; /* Change to your preferred font */
+            color: #333;
+            font-size: 2.5em;
+            margin-bottom: 20px;
+        }
+
+        .translator-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 70%;
+            max-width: 800px;
+            margin-top: 20px;
+        }
+
+        .input-section,
+        .output-section {
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        label {
+            margin-bottom: 10px;
+            color: #333;
+            font-weight: bold;
+        }
+
+        input {
+            padding: 10px;
+            width: calc(100% - 20px);
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            transition: border-color 0.3s ease-in-out;
+        }
+
+        input:focus {
+            border-color: #3498db;
+        }
+
+        button {
+            background-color: #3498db;
+            color: white;
+            padding: 10px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            width: 100%;
+            transition: background-color 0.3s ease-in-out;
+        }
+
+        button:hover {
+            background-color: #2980b9;
+        }
+
+        p {
+            margin-top: 20px;
+            color: #333;
+            margin-bottom: 0;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            margin-bottom: 10px;
+        }
+
+        .premium-image {
+            width: 150px; /* Adjust the size as needed */
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+
+        .eng {
+            color: blue;  /* Adjust the color as needed */
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Hinglish Translator</h1>
+
+    <img class="premium-image"
+        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSN5VobxP1QUBxbFK7r0bJ8ThkAQitlpOhfeg"
+        alt="Premium Image">
+
+    <div class="translator-container">
+        <div class="input-section">
+            <form method="post" action="/">
+                <label for="input_text">Enter a sentence in English:</label>
+                <input type="text" name="input_text" id="input_text" required>
+                <button type="submit">Translate</button>
+            </form>
+        </div>
+
+        <div class="output-section">
+            {% if result %}
+            <p>Generated Sentence:</p>
+            <p>{{ result[0]|safe }}</p>
+            <br>
+
+            <p>Example Sentences:</p>
+            <ul>
+                {% for example, translation in zipped_data %}
+                    <li>{{ example }} - {{ translation|safe }}</li>
+                    <br>
+                {% endfor %}
+            </ul>
+            {% endif %}
+        </div>
+    </div>
+</body>
+
+</html>
